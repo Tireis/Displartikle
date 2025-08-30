@@ -1,0 +1,27 @@
+{
+  "name": "displartikle",
+  "version": "1.0.0",
+  "description": "Displartikle is used to show every article currently sold in a shop on a display. If for instance, an article is sold out for some reason, there should be the possibility to click on the related object on the screen to refresh its state to \"sold out\".",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tireis/Displartikle.git"
+  },
+  "keywords": [],
+  "author": "Tim Tabert",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Tireis/Displartikle/issues"
+  },
+  "homepage": "https://github.com/Tireis/Displartikle#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "ws": "^8.18.3"
+  }
+}
