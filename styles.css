@@ -11,9 +11,28 @@ body {
     height: 10vh;
     justify-content: left;
     text-align: center;
-    background-color: #ffffff55;
     padding: 10px;
     margin: 20px;
+    cursor: pointer;
+}
+
+.inactive {
+    background-color: #00000055;
+    color: #00000055;
+    .objectPicture {
+        opacity: 0.5;
+    }
+}
+
+.active {
+    background-color: #ffffff55;
+}
+.soldImg {
+    display: none;
+}
+
+.object.inactive .soldImg {
+    display: block;
 }
 
 .objectPicture {

@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Displarticle</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="script" href="script.js">
+    <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
     <h1>This is the title</h1>
     <div id="articleSpace">
-        <div class="object">
-            <img class="objectPicture" src="target/images/Stripax.jpg" alt="stripax">
-            <p class="objectName">stripax</p>
+        <div class="object-container">
+            <img class="soldImg" src="target/images/Ausverkauft_Banner.png" alt="[AUSVERKAUFT]">
+            <div class="object active" onclick="changeState(this)">
+                <img class="objectPicture" src="target/images/Stripax.jpg" alt="stripax">
+                <p class="objectName">stripax</p>
+            </div>
         </div>
     </div>
 </body>
