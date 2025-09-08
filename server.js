@@ -1,4 +1,5 @@
 // Requirements for the server
+const { on } = require('events');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -26,8 +27,6 @@ function getImages(){
     const name = file.split(".")[0];
     const found = objectStates.find(object => object.name == name);
     const state = found ? found.state : "active" // Checks the state inside the JSON
-
-    console.log(state)
     
     return { // returns every file as JSON
       filename: file,
@@ -36,6 +35,24 @@ function getImages(){
       url: `target/images/${file}`
     }
   });
+}
+
+function invertObjectState(objectName){
+  if (fs.existsSync('objectsList.json')) {
+    try {
+      const jsonData = JSON.parse(fs.readFileSync('objectsList.json', 'utf-8'));
+      let updatedData = jsonData.map(object => 
+        object.name === objectName ? {...object, state: object.state === "active" ? "inactive" : "active"} : object
+      )
+
+      fs.writeFileSync('objectsList.json', JSON.stringify(updatedData, null, 2), 'utf-8');
+    } catch (err) {
+      console.error("err on reading JSON:", err);
+    }
+  }else{
+    throw Error("JSON file missing! Please restart the server!")
+  }
+
 }
 
 // Websocket Server
@@ -56,4 +73,24 @@ ws.on('connection', (socket) => { // New client connects with the server
   socket.send(JSON.stringify({
     images: getImages()
   }))
+
+  socket.on('message', (msg) => {
+    try{
+      const data = JSON.parse(msg);
+      console.log("Received: ", data)
+
+      if(data.type == "function"){
+        functionHandler(data.function, data.params)
+      }
+    }catch (err){
+      console.error("Error on receiving a message: ", err)
+    }
+  });
 });
+
+function functionHandler(funct, params){
+  switch(funct){
+    case "invertObjectState":
+      return invertObjectState(params)
+  }
+}

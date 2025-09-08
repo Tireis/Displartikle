@@ -40,4 +40,13 @@ function createNewObject(imgPath, state, name){
 function changeState(object){
     object.classList.toggle("inactive")
     object.classList.toggle("active")
+    let name = String(object.querySelector(`.objectPicture`).src).split('/') // returns a list of strings split by "/"
+    // to get the exact last word without the file extension decoded: "file%20name.jpg" -> "file name"
+    name = decodeURI(name[name.length - 1].split(".")[0]);
+    const invertObjectState = {
+        type: "function",
+        function: "invertObjectState",
+        params: name
+    }
+    socket.send(JSON.stringify(invertObjectState));
 }
