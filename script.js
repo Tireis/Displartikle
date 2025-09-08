@@ -1,20 +1,29 @@
 const articleSpace = document.getElementById("articleSpace");
 
-async function getImages(){
-    try{
-        const res = await fetch("http://localhost:3000/api/images");
-        if(!res.ok){
-            throw new Error(`Error with Server connection: [${res.status}]`);
-        }
-        const imgs = await res.json();
-        console.log(imgs)
-    }catch (err){
-        console.error(`Error with function getImages: ${err}`)
-    }
+const socket = new WebSocket("ws://localhost:3000")
+
+socket.onopen = () => {
+    console.log("socket connection created")
 }
 
-function createNewObject(imgPath, state){
-    let name = "Stripax"; // imgPath.split("/")
+socket.onmessage = (event) => {
+    const data = JSON.parse(event.data).images;
+    data.forEach(object => {
+        console.log(`This object called ${object.name} has the state: ${object.state} and Image Path: ${object.url}`)
+        let name = object.name
+        if(String(name).length > 8){
+            name = String(name).slice(0, 5) + "..."
+        }
+
+        createNewObject(object.url, object.state, name)
+    });
+}
+
+socket.onerror = (err) => {
+    console.log(`Websocket Error: ${err.message || err}`)
+}
+
+function createNewObject(imgPath, state, name){
     let object = document.createElement("div")
     object.className = `object ${state}`
     object.onclick = () => {
@@ -32,5 +41,3 @@ function changeState(object){
     object.classList.toggle("inactive")
     object.classList.toggle("active")
 }
-
-getImages()
