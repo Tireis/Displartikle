@@ -4,21 +4,44 @@ body {
     background-color: #ef7800;
 }
 
+.title {
+    font-size: 64pt;
+    margin-left: 5%;
+    top: 0%;
+    color: #ffffff;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#articles {
+    width: 100%;
+    justify-items: center;
+}
+
+#articleSpace {
+    width: 80%;
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+}
+
 .object {
+    position: relative; /* sets the object/ container to the reference point */
+    align-items: center;
+    justify-content: center;
     display: flex;
     flex-direction: row;
-    width: 20vw;
+    width: 23vw;
     height: 10vh;
-    justify-content: left;
-    text-align: center;
-    padding: 10px;
-    margin: 20px;
+    padding: 2%;
+    margin: 5%;
     cursor: pointer;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .inactive {
     background-color: #00000055;
-    color: #00000055;
+    color: #000000;
     .objectPicture {
         opacity: 0.5;
     }
@@ -26,6 +49,7 @@ body {
 
 .active {
     background-color: #ffffff55;
+    color: #FFFFFF;
 }
 .soldImg {
     display: none;
@@ -33,12 +57,27 @@ body {
 
 .object.inactive .soldImg {
     display: block;
+    position: absolute;
+    width: 90%;
+    transform: rotate(-20deg);
+    opacity: 100%;
+    z-index: 1;
+    left: -20%;
 }
 
 .objectPicture {
     margin: 5px;
+    position: absolute;
+    height: 92%;
+    top: 0%;
+    left: 0%;
 }
 
 .objectName {
     font-size: 48pt;
+    font-weight: bold;
+    position: absolute;
+    margin: 0;
+    margin-left: 15%;
+    overflow: hidden;
 }
