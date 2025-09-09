@@ -23,6 +23,7 @@ body {
     grid-auto-flow: row;
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
+    padding-bottom: 50vh;
 }
 
 .object {

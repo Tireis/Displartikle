@@ -50,3 +50,52 @@ function changeState(object){
     }
     socket.send(JSON.stringify(invertObjectState));
 }
+
+// Scrolling in the Website up and down to show everything:
+function autoScrollPresentation(speed = 1, pauseTime = 2000) {
+    let direction = 1; // 1: down, -1: up
+    let scrollInterval;
+    let interactionTimeout;
+    let isInteracting = false;
+
+    function startScrolling() {
+        scrollInterval = setInterval(() => {
+            if (isInteracting) return;
+
+            window.scrollBy(0, direction * speed);
+
+            const scrollTop = window.scrollY;
+            const scrollHeight = document.body.scrollHeight;
+            const windowHeight = window.innerHeight;
+
+            // Reached bottom
+            if (scrollTop + windowHeight >= scrollHeight) {
+                direction = -1;
+                resetTimeout;
+            }
+
+            // Reached top
+            if (scrollTop <= 0) {
+                direction = 1;
+                resetTimeout;
+            }
+        }, 20); // scroll every 20ms
+    }
+
+    function resetTimeout() {
+        isInteracting = true;
+        clearTimeout(interactionTimeout);
+        interactionTimeout = setTimeout(() => {
+            isInteracting = false;
+        }, 1000); // resume after 1s of no interaction
+    }
+
+    // Detect user interactions
+    ['mousemove', 'keydown', 'wheel', 'touchstart'].forEach(event => {
+        window.addEventListener(event, resetTimeout, { passive: true });
+    });
+
+    startScrolling();
+}
+
+autoScrollPresentation()
