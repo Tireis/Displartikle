@@ -59,6 +59,8 @@ function invertObjectState(objectName){
  * TODO: Check if there are new pictures, or if there are any pictures missing.
  * If there is a new picture, the server should automatically add it to the JSON (as active)
  * If there is any picture missing, the server should automatically delete it from the JSON and tell any Clients to refresh the page
+ * 
+ * TOOL: fs.watch() - https://nodejs.org/api/fs.html#fswatchfilename-options-listener
  */
 
 // Websocket Server
