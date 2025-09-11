@@ -1,3 +1,4 @@
 # Ignore target files and directorys
 /target
+/WMW_Shop_Artikel
 objectsList.json
