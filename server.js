@@ -6,7 +6,7 @@ const path = require('path');
 const WS = require("ws");
 
 // Returning the Path to the corresponding images
-const imageDir = path.join(__dirname, "WMW_Shop_Artikel")
+const imageDir = path.join(__dirname, "target", "images")
 
 function getImages(){
   const files = fs.readdirSync(imageDir);
